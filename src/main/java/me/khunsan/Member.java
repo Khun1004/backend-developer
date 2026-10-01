@@ -19,5 +19,9 @@ public class Member {
 
     @Column(name ="name")
     private String name;
+
+    public Member (String name) {
+        this.name = name;
+    }
     
 }
