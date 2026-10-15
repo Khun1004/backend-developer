@@ -75,7 +75,69 @@ public class MemberRepositoryTest {
         List<Member> result = memberRepository.findAll();
         assertThat(result.size()).isEqualTo(1);
         assertThat(result.get(0).getName()).isEqualTo("쿤산웨이");
+    }
 
+    @Sql("/insert-members.sql")
+    @DisplayName("테이블 member에서 id가 3인 레코드 삭제하기")
+    @Test
+    public void deleteById3() {
+        //준비 given
+
+        //실행 when
+        memberRepository.deleteById(3L);
+
+        // 검증 then
+        List<Member> members = memberRepository.findAll();
+        assertThat(members.size()).isEqualTo(2);
+    }
+
+    @Sql("/insert-members.sql")
+    @DisplayName("테이블 member 모든 레코드 삭제하기")
+    @Test
+    public void deleteAll() {
+        //준비 given
+//        List<Member> members = memberRepository.findAll();
+//        assertThat(members.size()).isEqualTo(2);
+
+        //실행 when
+        memberRepository.deleteAll();
+
+        // 검증 then
+        List<Member> members = memberRepository.findAll();
+        assertThat(members.size()).isZero();
+    }
+
+    @Sql("/insert-members.sql")
+    @DisplayName("테이블 member name이 'A', 'B'인 레코드를 한 번에 삽입하기")
+    @Test
+    public void saveMembers() {
+        //준비 given
+        // 두 개의 member 객체를 샐성해서 List에 넣는다.
+        List<Member> members = List.of(new Member("A"), new Member("B"));
+
+        //실행 when
+        memberRepository.saveAll(members);
+
+        // 검증 then
+//        assertThat(memberRepository.findAll().size()).isEqualTo(2);
+
+        members = memberRepository.findAll();
+        assertThat(members.size()).isEqualTo(2);
+    }
+
+    @Sql("/insert-members.sql")
+    @DisplayName("변경감지 기능을 통해 Id가 2인 레코드의 이름을 'B', 'BB'로 변경하기")
+    @Test
+    public void update() {
+        //준비 given
+        Member member = memberRepository.findById(2L).get();
+
+        //실행 when
+        member.setName("BB");
+
+        // 검증 then
+        member = memberRepository.findById(2L).get();
+        assertThat(member.getName()).isEqualTo("BB");
     }
 
 }
