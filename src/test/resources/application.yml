@@ -1,4 +1,0 @@
-# src/main/resources/data.sql 를 자동으로 실행하지 않도록 설정
-spring:
-  init:
-    mode: never
