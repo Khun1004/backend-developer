@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test Screen</title>
+</head>
+<body>
+<!--    <div>-->
+<!--        <h1>안녕하세요 <span th:text="${person.name}"></span>님</h1>-->
+<!--        <p>당신의 나이는 <span th:text="${person.age}"></span> 세 이군요. </p>-->
+<!--        <div>당신의 취미</div>-->
+<!--        <ul>-->
+<!--            <li th:each="hobby : ${person.hobbies}" >-->
+<!--                <span th:text="${hobby}"></span>-->
+<!--                <span th:if="${hobby == '외국어 공부'}">(대표취미)</span>-->
+<!--            </li>-->
+<!--        </ul>-->
+<!--    </div>-->
+
+    <div th:object="${person}">
+        <h1>안녕하세요 <span th:text="*{name}"></span>님</h1>
+        <p>당신의 나이는 <span th:text="*{age}"></span> 세 이군요. </p>
+        <div>당신의 취미</div>
+        <ul>
+            <li th:each="hobby : *{hobbies}" >
+                <span th:text="${hobby}"></span>
+                <span th:if="${hobby == '외국어 공부'}">(대표취미)</span>
+                <span th:unless="${hobby == '외국어 공부'}"
+                      style="color: red;">
+                    (일반취미)
+                </span>
+            </li>
+        </ul>
+    </div>
+    <a href="/api/articles/1">블로그 1번 글 내용 보기</a>
+
+</body>
+</html>

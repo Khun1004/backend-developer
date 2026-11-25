@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Test Screen</title>
+</head>
+<body>
+    <h1>안녕하세요 <span th:text="${name}"></span>님</h1>
+    <p>당신의 나이는 <span th:text="${age}"></span> 세 이군요. </p>
+    <div>당신의 취미</div>
+    <ul>
+<!--        <li th:text="${hobbies[0]}"></li>-->
+<!--        <li th:text="${hobbies[1]}"></li>-->
+<!--        <li th:text="${hobbies[2]}"></li>-->
+        <li th:each="hobby : ${hobbies}" >
+            <span th:text="${hobby}"></span>
+            <span th:if="${hobby == '외국어 공부'}">(대표취미)</span>
+        </li>
+    </ul>
+</body>
+</html>
